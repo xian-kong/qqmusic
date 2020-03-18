@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>mymusic</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/vue.js"></script>
+    <link rel="stylesheet" href="css/mymusic_logout.css" />
+    <style>
+      .modal-body .tab-content > div > div > span:last-child {
+        width: 100px;
+        font-size: 15px;
+      }
+      .tab-content + div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .font_danger {
+        color: red;
+      }
+      .font_success {
+        color: #67c23a;
+      }
+      .modal-body {
+        position: relative;
+      }
+
+      .phone_reg {
+        width: 100%;
+        height: 100%;
+      }
+      .phone_reg p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        height: 45px;
+      }
+      .phone_reg > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px 0;
+      }
+      .phone_reg input {
+        width: 45%;
+        background-color: rgba(0, 0, 0, 0.05);
+        font-size: 14px;
+      }
+      .phone_reg button {
+        color: #fff;
+        width: 175px;
+        margin: 15px auto;
+        display: block;
+      }
+      .phone_reg button:last-child {
+        background-color: #606266;
+      }
+      .phone_reg button:last-child:hover {
+        background-color: #303133;
+      }
+      /* .modal{display: block;} */
+      .modal1 {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1050;
+        overflow: hidden;
+        outline: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <!--头部    -->
+        <div class="qqmusic_index_header">
+          <div class="d-flex flex-wrap">
+            <div>
+              <ul class="d-flex justify-content-around font18">
+                <li>
+                  <a href="hb_index.html"
+                    ><img src="images/logo.png" alt=""
+                  /></a>
+                </li>
+                <li class=""><a href="hb_index.html">音乐馆</a></li>
+                <li class=""><a href="javascript:;">我的音乐</a></li>
+                <li class=""><a href="javascript:;">客户端</a></li>
+                <li class=""><a href="javascript:;">音乐号</a></li>
+                <li class=""><a href="javascript:;">VIP</a></li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <li>
+                  <input
+                    type="text"
+                    placeholder="搜索音乐、MV、歌单、用户"
+                    class="input_search  font14"
+                  />
+                  <button>
+                    <div class="input_search_img"></div>
+                  </button>
+                </li>
+                <li class="">
+                  <button @click="clickreg" class="btn btn-warning">
+                    登录
+                  </button>
+                </li>
+                <li class="">
+                  <button class="btn btn-success">开通绿钻</button>
+                </li>
+                <li class=""><button class="btn btn-danger">付费包</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 主体部分 -->
+      <div class="content">
+        <table></table>
+        <div>
+          <h1>私人空间音乐，听我想听的歌</h1>
+          <div>登录管理我的音乐，多终端同步</div>
+          <button @click="clickreg" class="btn btn-success">立即登录</button>
+          <div
+            id="mymodal"
+            class="modal1"
+            :style="isReg?'display:block':'display:none'"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <button data-dismiss="modal" class="close" @click="clear">
+                  <div>×</div>
+                </button>
+                <div class="modal-header">
+                  <h4>登录QQ音乐获得更多体验</h4>
+                </div>
+                <div class="modal-body">
+                  <div
+                    class="modal_log"
+                    v-show="!clicked"
+                    @click="alertmessage($event)"
+                  >
+                    <ul
+                      class="nav nav-pills mb-4 justify-content-around align-items-center"
+                    >
+                      <li>
+                        <a
+                          class="nav-link active show"
+                          data-toggle="pill"
+                          href="#phone-tab"
+                          >手机登录</a
+                        >
+                      </li>
+                      <li>
+                        <a class="nav-link" data-toggle="pill" href="#qq-tab"
+                          >QQ登录</a
+                        >
+                      </li>
+                    </ul>
+                    <div class="tab-content">
+                      <div id="phone-tab" class="tab-pane active">
+                        <div class="mb-3">
+                          <img src="images/dianhua.png" alt="" />
+                          <input
+                            class="form-control"
+                            type="text"
+                            placeholder="请输入手机号"
+                            v-model="phone"
+                            :disabled="!isAgreen"
+                          />
+                          <img
+                            :class="phone===''?'invisible':'visible'"
+                            :src="check1?'images/zhengque.png':'images/cuowu.png'"
+                            alt=""
+                          />
+                          <span
+                            :class="phone===''?'invisible':(check1?'font_success':'font_danger')"
+                            >{{message1}}</span
+                          >
+                        </div>
+                        <div class="mb-3">
+                          <img src="images/ai-password.png" alt="" />
+                          <input
+                            class="form-control"
+                            type="text"
+                            placeholder="请输入密码"
+                            v-model="password"
+                            :disabled="!isAgreen"
+                          />
+                          <img
+                            :class="password===''?'invisible':'visible'"
+                            :src="check2?'images/zhengque.png':'images/cuowu.png'"
+                            alt=""
+                          />
+                          <span
+                            :class="(password===''?'invisible':'visible')"
+                            :style="check2?'color:#67C23A':'color:red'"
+                            >{{message2}}</span
+                          >
+                        </div>
+                        <button class="btn btn-success" :disabled="!isAgreen">
+                          登录
+                        </button>
+                        <!-- 点击手机注册按钮让div.modal_login隐藏，同时div.phone_reg显示 -->
+                        <button
+                          class="btn btn-primary"
+                          @click="phonereg"
+                          :disabled="!isAgreen"
+                        >
+                          手机注册
+                        </button>
+                      </div>
+                      <div id="qq-tab" class="tab-pane">
+                        <div class="mb-3">
+                          <img src="images/qq.png" alt="" />
+                          <input
+                            class="form-control"
+                            type="text"
+                            placeholder="请输入QQ账号  "
+                            v-model="qq"
+                            :disabled="!isAgreen"
+                          />
+                          <img
+                            :class="qq===''?'invisible':'visible'"
+                            :src="check3?'images/zhengque.png':'images/cuowu.png'"
+                            alt=""
+                          />
+                          <span
+                            :class="(qq===''?'invisible':'visible')"
+                            :style="check3?'color:#67C23A':'color:red'"
+                            >{{message3}}</span
+                          >
+                        </div>
+                        <div class="mb-3">
+                          <img src="images/ai-password.png" alt="" />
+                          <input
+                            class="form-control"
+                            type="text"
+                            placeholder="请输入QQ密码"
+                            v-model="qqPassword"
+                            :disabled="!isAgreen"
+                          />
+                          <img
+                            :class="qqPassword===''?'invisible':'visible'"
+                            :src="check4?'images/zhengque.png':'images/cuowu.png'"
+                            alt=""
+                          />
+                          <span
+                            :class="qqPassword===''?'invisible':'visible'"
+                            :style="check4?'color:#67C23A':'color:red'"
+                            >{{message4}}</span
+                          >
+                        </div>
+                        <button class="btn btn-success" :disabled="!isAgreen">
+                          登录
+                        </button>
+                        <button class="btn btn-primary" :disabled="!isAgreen">
+                          QQ注册
+                        </button>
+                      </div>
+                    </div>
+                    <div>
+                      <input type="checkbox" v-model:checked="isAgreen" />
+                      <span class="font12 ml-2"
+                        >同意 《服务条款》 《隐私政策》 《儿童隐私政策》</span
+                      >
+                    </div>
+                  </div>
+                  <!-- 手机注册页面，默认隐藏，点击注册按钮显示 -->
+                  <div class="phone_reg" v-show="clicked">
+                    <p>手机号注册</p>
+                    <!-- ？？？需要检测昵称是否已存在 -->
+                    <div>
+                      <img src="images/nicheng.png" alt="" />
+                      <input
+                        class="form-control"
+                        type="text"
+                        placeholder="请输入昵称/由1-10位汉字或英文字母组成"
+                        v-model="uname"
+                      />
+                      <img
+                        :class="uname===''?'invisible':'visible'"
+                        :src="check5?'images/zhengque.png':'images/cuowu.png'"
+                        alt=""
+                      />
+                    </div>
+                    <div>
+                      <img src="images/mobile.png" alt="" />
+                      <input
+                        class="form-control"
+                        type="text"
+                        placeholder="请输入手机号"
+                        v-model="phone1"
+                      />
+                      <img
+                        :class="phone1===''?'invisible':'visible'"
+                        :src="check6?'images/zhengque.png':'images/cuowu.png'"
+                        alt=""
+                      />
+                    </div>
+                    <div>
+                      <img src="images/ai-password.png" alt="" />
+                      <input
+                        class="form-control"
+                        type="text"
+                        placeholder="请设置密码/由6-12位英文字母或者数字组成"
+                        v-model="upwd1"
+                      />
+                      <img
+                        :class="upwd1===''?'invisible':'visible'"
+                        :src="check7?'images/zhengque.png':'images/cuowu.png'"
+                        alt=""
+                      />
+                    </div>
+                    <div>
+                      <img src="images/ai-password.png" alt="" />
+                      <input
+                        class="form-control"
+                        type="text"
+                        placeholder="请再次输入密码"
+                        v-model="upwd2"
+                      />
+                      <img
+                        :class="upwd2===''?'invisible':'visible'"
+                        :src="check8?'images/zhengque.png':'images/cuowu.png'"
+                        alt=""
+                      />
+                    </div>
+                    <button class="btn btn-primary">提交</button>
+                    <button class="btn" @click="returnlog">返回登录</button>
+                  </div>
+                </div>
+                <div class="modal-footer text-center">
+                  <button class="btn btn-success my-3">下载客户端</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/mymusic_logout.js"></script>
+  </body>
+</html>

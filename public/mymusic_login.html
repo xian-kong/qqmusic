@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/vue.js"></script>
+  <script src="js/swiper.min.js"></script>
+  <link rel="stylesheet" href="css/bootstrap.css"/>
+  <link rel="stylesheet" href="css/swiper.min.css"/>
+  <link rel="stylesheet" href="css/mymusic_login.css"/>
+  <link rel="stylesheet" href="iconfont/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="leftside">
+      <div class="songlist">
+          <h3>我的歌单</h3>
+          <h3>(4)</h3>
+          <button class="btn btn-success">新建</button>
+      </div>
+      <ul>
+        <li>
+          <img src="" alt="">
+          <div>
+            <p>我喜欢</p>
+            <p>10首</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="rightside">
+      <div class="top">
+        <div class="album-img">
+          <img src="images/xihuan.png" alt="">
+        </div>
+        <div>
+          <div class="toprow">
+            <!-- <div>
+              <img src="images/gedan.png" alt="">
+              <span>歌单</span>
+            </div> -->
+            <div>我喜欢</div>
+          </div>
+          <div class="user">
+            <img class="user" src="images/ying.png" alt="">
+            <span class="userid">hearlisten</span>
+            <span class="buildtime">2019-11-11创建</span>
+          </div>
+          <div class="buttons">
+            <button class="btn">
+              播放
+              <img src="images/bofang_2.png" alt="">
+            </button>
+            <button class="btn">
+              添加到
+              <img src="images/tianjia.png" alt="">
+            </button>
+            <button class="btn">
+              分享
+              <img src="images/fenxiang_1.png" alt="">
+            </button>
+            <button class="btn">
+              下载
+              <img src="images/xiazai_2.png" alt="">
+            </button>
+            <button class="btn">
+              评论
+              <img src="images/pinglun.png" alt="">
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="middle">
+        <div class="mid-toprow">
+          <div>
+            <span>歌曲列表</span>
+            <span>10首歌</span>
+          </div>
+          <div>
+            <span>播放：</span>
+            <span>100</span>
+            <span>次</span>
+          </div>
+        </div>
+        <ul>
+          <li>
+            <div>歌名</div>
+            <div>时长</div>
+            <div>歌手</div>
+            <div>专辑</div>
+          </li>
+          <li>
+            <div>
+                <span>1</span>
+                <img src="images/video.png" alt="">
+                <span>光年之外</span>
+                <span>-（电影《太空旅客》中文主题曲）</span>
+                <img src="" alt="">
+            </div>
+            <div>
+                <span>03:55</span>
+                <!-- 默认隐藏，悬浮出现 -->
+                <img src="" alt="">
+                <img src="" alt="">
+                <img src="" alt="">
+                <img src="" alt="">
+            </div>
+            <span>G.E.M.邓紫棋</span>
+            <span>光年之外</span>
+          </li>
+          <li>
+              <div>
+                  <span>1</span>
+                  <img src="images/video.png" alt="">
+                  <span>光年之外</span>
+                  <span>-（电影《太空旅客》中文主题曲）</span>
+                  <img src="" alt="">
+              </div>
+              <div>
+                  <span>03:55</span>
+                  <!-- 默认隐藏，悬浮出现 -->
+                  <img src="" alt="">
+                  <img src="" alt="">
+                  <img src="" alt="">
+                  <img src="" alt="">
+              </div>
+              <span>G.E.M.邓紫棋</span>
+              <span>光年之外</span>
+          </li>
+          <li>
+              <div>
+                  <span>1</span>
+                  <img src="images/video.png" alt="">
+                  <span>光年之外</span>
+                  <span>-（电影《太空旅客》中文主题曲）</span>
+                  <img src="" alt="">
+              </div>
+              <div>
+                  <span>03:55</span>
+                  <!-- 默认隐藏，悬浮出现 -->
+                  <img src="" alt="">
+                  <img src="" alt="">
+                  <img src="" alt="">
+                  <img src="" alt="">
+              </div>
+              <span>G.E.M.邓紫棋</span>
+              <span>光年之外</span>
+          </li>
+        </ul>
+      </div>
+      <div class="bottom">
+        <div>
+          <span>评论</span>
+          <span>共0条评论</span>
+        </div>
+        <div>
+          <div>
+            <img src="images/ying.png" alt="" class="user">
+          </div>
+          <div>
+            <div class="textarea">
+              <textarea name="" id="" cols="30" rows="10" placeholder="评论"></textarea>
+            </div>
+            <div class="commentimgs">
+              <div>
+                <a href="javascript:;">
+                  <img src="images/biaoqingfuhao.png" alt="">
+                </a>
+                <a href="javascript:;">
+                  <img src="images/at.png" alt="">
+                </a>
+              </div>
+              <div>
+                <span>140</span>
+                <button class="btn btn-success">评论</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- 音乐播放器 -->
+<div class="playbox">
+  <div class="playcontrol">
+    <span class="iconfont icon-shangyiqu1
+    "></span>
+    <span class="iconfont icon-bofang-"></span>
+    <span class="iconfont icon-xiayiqu"></span>
+  </div>
+  <div class="process">
+    <div class="detail">
+      <span class="songdetail"></span>
+      <span class="timedetail"></span>
+    </div>
+    <div class="processbar">
+      <div class="audio">
+        <audio id="myaudio" src="">
+          您的浏览器不支持 audio 标签。
+        </audio>
+      </div>
+      <div class="process_button"></div>
+    </div>
+  </div>
+  <div class="dealit">
+    <span class="playstyle iconfont icon-shunxubofang-"></span>
+    <span class="iconfont icon-xinaixin1"></span>
+    <span class="iconfont icon-xiazai"></span>
+    <span class="iconfont icon-pinglun"></span>
+    <div class="voice">
+      <span class="iconfont icon-shengyin"></span>
+      <div class="vol">
+        <div class="volbar"></div>
+        <div class="vol_button"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- js部分 -->
+  <script src="js/mymusic_login.js"></script>
+</body>
+</html>
